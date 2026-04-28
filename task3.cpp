@@ -2,26 +2,29 @@
 #include <fstream>
 using namespace std;
 
-int main() 
+int main()
 {
-    ifstream infile;
-    infile.open("input.txt");
+	ofstream outFile("Data.txt");
+	outFile << "Hello, this is a sample text file." << endl;
+    ifstream file("Data.txt");
 
-    if (!infile)
+    if (!file)
     {
-        cout << "Error: Could not open file!" << endl;
+        cout << "Error opening file!" << endl;
         return 1;
     }
 
     char ch;
     int count = 0;
 
-    while (infile.get(ch))
+    while (file.get(ch))
     {
         count++;
     }
 
-    infile.close();
-    cout << "Total number of characters in file: " << count << endl;
+    file.close();
+
+    cout << "Total characters: " << count << endl;
+
     return 0;
 }
