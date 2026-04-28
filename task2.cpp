@@ -5,22 +5,24 @@ using namespace std;
 
 int main()
 {
-    ofstream outfile;
-    outfile.open("output.txt");
+    string text;
 
-    if (!outfile)
+    cout << "Enter a string: ";
+	getline(cin, text);
+
+    ofstream file("output.txt",ios::out);
+
+    if (!file)
     {
-        cout << "Error: Could not open file!" << endl;
+        cout << "Error opening file!" << endl;
         return 1;
     }
 
-    string userInput;
-    cout << "Enter a string to write to the file: ";
-    getline(cin, userInput);
+    file << text;
 
-    outfile << userInput << endl;
-    outfile.close();
+    file.close();
 
-    cout << "String successfully written to output.txt" << endl;
+    cout << "Data written successfully!" << endl;
+
     return 0;
 }
