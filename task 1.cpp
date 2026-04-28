@@ -2,24 +2,28 @@
 #include <fstream>
 using namespace std;
 
-int main() 
+int main()
 {
-    ifstream infile;
-    infile.open("input.txt");
+    ofstream writing;
+    writing.open("task1.txt");
+    writing << "I am writing in file" << endl;
+    writing.close();
 
-    if (!infile)
+    ifstream reading("task1.txt", ios::in);
+
+    if (!reading)
     {
-        cout << "Error: Could not open file!" << endl;
+        cout << "eroooooooor" << endl;
         return 1;
     }
 
+    cout << "showing file content" << endl;
+
     char ch;
-    cout << "File contents:" << endl;
-    while (infile.get(ch))
+    while (reading.get(ch))
     {
         cout << ch;
     }
-
-    infile.close();
+    cout << "end of the file reached" << endl;
     return 0;
 }
