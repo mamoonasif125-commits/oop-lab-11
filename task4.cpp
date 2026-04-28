@@ -1,100 +1,75 @@
 #include <iostream>
 #include <fstream>
-#include <string>
+#include<string>
 using namespace std;
 
 class Student
 {
-  private:
+private:
     string name;
-    int    age;
-    float  cgpa;
+    int age;
+    float cgpa;
     string dateOfBirth;
     string placeOfBirth;
 
 public:
-    Student() : age(0), cgpa(0.0f)
-{
-  
-}
+    void getData()
+    {
 
-    void getData() 
-{
-        cout << "\n--- Enter Student Details ---" << endl;
-
-        cout << "Name: ";
-        cin.ignore();
+        cout << "Enter Name: ";
         getline(cin, name);
 
-        cout << "Age: ";
+        cout << "Enter Age: ";
         cin >> age;
 
-        cout << "CGPA: ";
+        cout << "Enter CGPA: ";
         cin >> cgpa;
 
-        cout << "Date of Birth (DD/MM/YYYY): ";
         cin.ignore();
+
+        cout << "Enter Date of Birth: ";
         getline(cin, dateOfBirth);
 
-        cout << "Place of Birth: ";
+        cout << "Enter Place of Birth: ";
         getline(cin, placeOfBirth);
     }
 
-    void writeToFile(ofstream& outfile)
-     {
-        outfile << "----------------------------" << endl;
-        outfile << "Name          : " << name         << endl;
-        outfile << "Age           : " << age           << endl;
-        outfile << "CGPA          : " << cgpa          << endl;
-        outfile << "Date of Birth : " << dateOfBirth   << endl;
-        outfile << "Place of Birth: " << placeOfBirth  << endl;
-        outfile << "----------------------------" << endl;
-    }
-
-    void display() const
-     {
-        cout << "Name: "           << name
-             << ", Age: "          << age
-             << ", CGPA: "         << cgpa
-             << ", DOB: "          << dateOfBirth
-             << ", Place: "        << placeOfBirth << endl;
+    void writeToFile(ofstream& file)
+    {
+        file << "Name: " << name << endl;
+        file << "Age: " << age << endl;
+        file << "CGPA: " << cgpa << endl;
+        file << "Date of Birth: " << dateOfBirth << endl;
+        file << "Place of Birth: " << placeOfBirth << endl;
     }
 };
 
-int main() 
+int main()
 {
-    const int SIZE = 5;
-    Student students[SIZE];
+	Student s[10];
 
-    cout << "  Bahria University Admission System    " << endl;
-
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < 10; i++)
     {
-        cout << "\nStudent " << (i + 1) << " of " << SIZE << ":" << endl;
-        students[i].getData();
+        cout << "\nEnter data for Student " << i + 1 << endl;
+        s[i].getData();
     }
-    ofstream outfile;
-    outfile.open("Data.txt");
 
-    if (!outfile)
+    ofstream file("Data.txt");
+
+    if (!file)
     {
-        cout << "Error: Could not open Data.txt for writing!" << endl;
+        cout << "Error opening file!" << endl;
         return 1;
     }
 
-    outfile << "  Bahria University - Student Records   " << endl;
- 
-
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < 5; i++)
     {
-        outfile << "Record #" << (i + 1) << endl;
-        students[i].writeToFile(outfile);
+        s[i].writeToFile(file);
     }
 
-    outfile.close();
+    file.close();
 
-   
-    cout << "\nAll 5 student records successfully saved to Data.txt!" << endl;
-  
+    cout << "\nAll student records saved successfully in Data.txt!" << endl;
+
     return 0;
 }
